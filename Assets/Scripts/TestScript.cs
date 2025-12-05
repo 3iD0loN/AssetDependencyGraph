@@ -1,12 +1,12 @@
-﻿using System;
+﻿using QuikGraph;
+using QuikGraph.Algorithms;
+using QuikGraph.Graphviz;
+using QuikGraph.Graphviz.Dot;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UIElements;
-
-using QuikGraph;
-using QuikGraph.Graphviz;
 
 public class TestScript : MonoBehaviour
 {
@@ -35,12 +35,18 @@ public class TestScript : MonoBehaviour
         }
         //*/
 
-        var graphviz = new GraphvizAlgorithm<int, Edge<int>>(testGraph);
+        var graphvizAlgorithm = new GraphvizAlgorithm<int, Edge<int>>(testGraph);
+        graphvizAlgorithm.CommonVertexFormat.Shape = GraphvizVertexShape.Diamond;
+        graphvizAlgorithm.CommonEdgeFormat.ToolTip = "Edge tooltip";
+        graphvizAlgorithm.FormatVertex += (sender, args) =>
+        {
+            args.VertexFormat.Label = $"Vertex {args.Vertex}";
+        };
 
-        string dotGraphSource = graphviz.Generate();
+        string dotGraphSource = graphvizAlgorithm.Generate();
         Debug.Log(dotGraphSource);
 
-        string outputFilePath = graphviz.Generate(new FileDotEngine(), "dotOutputGraph");
+        string outputFilePath = graphvizAlgorithm.Generate(new FileDotEngine(), "dotOutputGraph");
         Debug.Log(outputFilePath);
     }
 }
