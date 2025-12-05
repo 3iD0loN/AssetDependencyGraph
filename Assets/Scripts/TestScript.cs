@@ -10,9 +10,6 @@ using UnityEngine.UIElements;
 
 public class TestScript : MonoBehaviour
 {
-    [SerializeField]
-    private int testProperty;
-
     private AdjacencyGraph<int, Edge<int>> testGraph;
 
     // Start is called before the first frame update
@@ -36,11 +33,20 @@ public class TestScript : MonoBehaviour
         //*/
 
         var graphvizAlgorithm = new GraphvizAlgorithm<int, Edge<int>>(testGraph);
-        graphvizAlgorithm.CommonVertexFormat.Shape = GraphvizVertexShape.Diamond;
+        graphvizAlgorithm.CommonVertexFormat.Shape = GraphvizVertexShape.Rectangle;
         graphvizAlgorithm.CommonEdgeFormat.ToolTip = "Edge tooltip";
         graphvizAlgorithm.FormatVertex += (sender, args) =>
         {
-            args.VertexFormat.Label = $"Vertex {args.Vertex}";
+            args.VertexFormat.IsHtmlLabel = true;
+            args.VertexFormat.Label = $"<table border=\"0\" cellborder=\"0\" cellspacing=\"0\">" +
+            $"<tr><td><b>Player.prefab</b></td></tr>" +
+            $"<tr><td align=\"left\">Type: Prefab</td></tr>" +
+            $"<tr><td align=\"left\">Size: 32 KB</td></tr>" +
+            $"</table>";
+        };
+        graphvizAlgorithm.FormatEdge += (sender, args) =>
+        {
+            args.EdgeFormat.Style = GraphvizEdgeStyle.Dashed;
         };
 
         string dotGraphSource = graphvizAlgorithm.Generate();
