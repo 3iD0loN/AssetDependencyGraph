@@ -86,6 +86,12 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.usp.assetdependencygraph": {
+      "version": "file:com.usp.assetdepenencygraph",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
