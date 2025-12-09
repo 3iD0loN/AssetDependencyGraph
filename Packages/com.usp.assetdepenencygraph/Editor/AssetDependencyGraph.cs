@@ -7,13 +7,12 @@ using System.IO;
 using UnityEditor;
 //using Digit.Client.AssetBundles;
 using UnityEngine;
-using static Codice.Client.BaseCommands.BranchExplorer.ExplorerData.BrExTreeBuilder.BrExFilter;
 //using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Digit.EditorTools.AssetBundles
 {
-    public static class AssetBundleEditorUtils
+    public static class AssetDependencyGraph
     {
         #region Constants
         private const string SearchableTypes = "t:Prefab t:Material t:Shader t:Model t:Scene t:ScriptableObject t:AnimatorController t:AnimationClip t:AnimatorOverrideController t:AudioMixer t:Animation";
